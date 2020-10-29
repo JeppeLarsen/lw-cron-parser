@@ -55,7 +55,6 @@ interface ParserOptions {
   endDate?: string | number | Date
   iterator?: boolean
   utc?: boolean
-  tz?: string
 }
 
 declare class CronExpression {

@@ -1,15 +1,14 @@
-cron-parser
+reLightweight Cron Parser
 ================
 
-[![Build Status](https://travis-ci.org/harrisiirak/cron-parser.svg?branch=master)](https://travis-ci.org/harrisiirak/cron-parser)
-[![NPM version](https://badge.fury.io/js/cron-parser.png)](http://badge.fury.io/js/cron-parser)
+Lightweight Cron Parser is a fork of [cron-parser by Harri Siirak](https://github.com/harrisiirak/cron-parser) that utilizes [Day.js](https://day.js.org/en/) instead of [Moment Timezone](https://momentjs.com/timezone/). This significantly reduces the bundle size.
 
-Node.js library for parsing crontab instructions. It includes support for timezones and DST transitions.
+Timezones are not supported at the moment.
 
 Setup
 ========
 ```bash
-npm install cron-parser
+npm install lw-cron-parser
 ```
 
 Supported format
@@ -86,27 +85,6 @@ try {
 
 ```
 
-Timezone support
-
-```javascript
-var parser = require('cron-parser');
-
-var options = {
-  currentDate: '2016-03-27 00:00:01',
-  tz: 'Europe/Athens'
-};
-
-try {
-  var interval = parser.parseExpression('0 * * * *', options);
-
-  console.log('Date: ', interval.next().toString()); // Date:  Sun Mar 27 2016 01:00:00 GMT+0200
-  console.log('Date: ', interval.next().toString()); // Date:  Sun Mar 27 2016 02:00:00 GMT+0200
-  console.log('Date: ', interval.next().toString()); // Date:  Sun Mar 27 2016 04:00:00 GMT+0300 (Notice DST transition)
-} catch (err) {
-  console.log('Error: ' + err.message);
-}
-```
-
 Options
 ========
 
@@ -116,14 +94,8 @@ Options
 `currentDate` and `endDate` accept `string`, `integer` and `Date` as input.
 
 In case of using `string` as input, not every string format accepted
-by the `Date` constructor will work correctly. The supported formats are: [`ISO8601`](http://momentjs.com/docs/#/parsing/string/) and the older
-[`ASP.NET JSON Date`](http://momentjs.com/docs/#/parsing/asp-net-json-date/) format. The reason being that those are the formats accepted by the
-[`moment`](http://momentjs.com) library which is being used to handle dates.
+by the `Date` constructor will work correctly. The supported format are [`ISO8601`](https://en.wikipedia.org/wiki/ISO_8601)
 
-Using `Date` as an input can be problematic specially when using the `tz` option. The issue being that, when creating a new `Date` object without
-any timezone information, it will be created in the timezone of the system that is running the code. This (most of times) won't be what the user
-will be expecting. Using one of the supported `string` formats will solve the issue(see timezone example).
 
 * *iterator* - Return ES6 compatible iterator object 
 * *utc* - Enable UTC
-* *tz* - Timezone string. It won't be used in case `utc` is enabled

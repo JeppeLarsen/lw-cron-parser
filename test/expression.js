@@ -1298,28 +1298,6 @@ test('should work for valid second sunday at noon in may', function(t) {
   t.end();
 });
 
-test('should work for valid second sunday at noon in may (UTC+3)', function(t) {
-  try {
-    var options = {
-      currentDate: new CronDate('2019-05-12T11:59:00.000', 'Europe/Sofia')
-    };
-    var expected = new CronDate('2019-05-12T12:00:00.000', 'Europe/Sofia');
-
-    var interval = CronExpression.parse('0 0 12 ? MAY 0#2', options);
-    var date = interval.next();
-
-    t.equal(
-      date.toISOString(),
-      expected.toISOString(),
-      'Expression "0 0 12 ? MAY 0#2" has next() that matches expected: ' + expected.toISOString()
-    );
-  } catch (err) {
-    t.ifError(err, 'Interval parse error');
-  }
-
-  t.end();
-});
-
 test('should work with both dayOfMonth and nth occurence of dayOfWeek', function(t) {
   try {
     var options = {
