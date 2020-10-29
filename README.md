@@ -1,4 +1,4 @@
-reLightweight Cron Parser
+Lightweight Cron Parser
 ================
 
 Lightweight Cron Parser is a fork of [cron-parser by Harri Siirak](https://github.com/harrisiirak/cron-parser) that utilizes [Day.js](https://day.js.org/en/) instead of [Moment Timezone](https://momentjs.com/timezone/). This significantly reduces the bundle size.
